@@ -86,7 +86,19 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title:`Kayla's Additional Article`,
+
+    date:`December 2nd, 2020`,
+
+    firstParagraph:`Return it? Are you insane? Did you hear nothing I said? Buy another one, Morty! Consume, Morty! Nobody's out there shopping with this fucking virus! You gotta shove these seeds way up your butt Morty, waay up there. Now if you'll excuse me, I've got a quick solo adventure to go on and this one will not be directed by Ron Howard. Mind your own goddamn business, Gene! I'm having a conversation with my mother here! Kissing Rick's ass isn't gonna make him stay, Mom, but it will help you lose everyone else.`,
+
+    secondParagraph:`There's pros and cons to every alternate timeline. Fun facts about this one – It's got giant, telepathic spiders, 11 9/11s, and the best ice cream in the multiverse! Shadow Jacker, you haven't come out of your masturbation cave in eons! I'll be with Reuben in my workshop while you guys are having another day in Phil Collin's proverbial paradise. I'm a bit of a stickler Meeseeks, what about your short game?`,
+
+    thirdParagraph:`I was just killing some snaked up here like everyone else, I guess, and finishing the Christmas lights. I know you're real because i have a ton of bad memories with you. I know the two of you are very different from each other in a lot of ways, but you have to understand that as far as Grandpa's concerned, you're both pieces of shit! Yeah. I can prove it mathematically. Actually, l-l-let me grab my whiteboard. This has been a long time coming, anyways. Oh, we're welllll past that, Jerry!`
   }
+
 ];
 
 /*
@@ -114,3 +126,47 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker(article){
+  const artPanel = document.createElement('div');
+  const artTitle = document.createElement('h2');
+  const artDate = document.createElement('p');
+  const para1 = document.createElement('p');
+  const para2 = document.createElement('p');
+  const para3 = document.createElement('p');
+  const button = document.createElement('span');
+
+  artPanel.appendChild(artTitle);
+  artPanel.appendChild(artDate);
+  artPanel.appendChild(para1);
+  artPanel.appendChild(para2);
+  artPanel.appendChild(para3);
+  artPanel.appendChild(button);
+
+  artPanel.classList.add('article');
+  artDate.classList.add('date');
+  button.classList.add('expandButton');
+
+  artTitle.textContent = (`${article.title}`);
+  artDate.textContent = (`${article.date}`);
+  para1.textContent = (`${article.firstParagraph}`);
+  para2.textContent = (`${article.secondParagraph}`);
+  para3.textContent = (`${article.thirdParagraph}`);
+  button.textContent = ('+');
+
+  button.addEventListener('click', function (event){
+    artPanel.classList.toggle('article-open');
+  });
+  
+  return artPanel;
+};
+
+const articles = document.querySelector('.articles');
+
+const artElem = data.map((data) => {
+  return articleMaker(data);
+});
+
+artElem.forEach((artElem) => {
+  articles.appendChild(artElem);
+});
